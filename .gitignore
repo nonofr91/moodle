@@ -1,0 +1,17 @@
+# Logs
+*.log
+
+# Env files
+.env
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node / frontend (au cas où)
+node_modules/
+
+# Docker
+*.pid
