@@ -3,7 +3,7 @@ set -e
 
 CONFIG_FILE=/var/www/html/config.php
 
-# If config.php exists, fix dbtype and wwwroot for reverse proxy/HTTPS
+# If config.php exists, fix dbtype and wwwroot/HTTPS
 if [ -f "$CONFIG_FILE" ]; then
   # Ensure dbtype is mariadb instead of mysql/mysqli
   sed -i "s/'dbtype'[[:space:]]*=>[[:space:]]*'mysql'/'dbtype'    => 'mariadb'/" "$CONFIG_FILE" || true
@@ -24,10 +24,7 @@ if [ -f "$CONFIG_FILE" ]; then
     sed -i "s#\\$CFG->wwwroot[[:space:]]*=[[:space:]]*'.*';#\\$CFG->wwwroot   = '${TARGET_URL}';#" "$CONFIG_FILE" || true
   fi
 
-  # Ensure reverse proxy flags
-  if ! grep -q "\\$CFG->reverseproxy" "$CONFIG_FILE"; then
-    printf "\n\\$CFG->reverseproxy = true;\n" >> "$CONFIG_FILE"
-  fi
+  # Ensure sslproxy flag (reverseproxy left to manual config)
   if ! grep -q "\\$CFG->sslproxy" "$CONFIG_FILE"; then
     printf "\n\\$CFG->sslproxy = true;\n" >> "$CONFIG_FILE"
   fi
