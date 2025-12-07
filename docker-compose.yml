@@ -5,10 +5,10 @@ services:
     image: mariadb:10.11
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${SERVICE_PASSWORD_MOODLE-DB-ROOT:-rootpassword}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-moodle}
       MYSQL_USER: ${MYSQL_USER:-moodle}
-      MYSQL_PASSWORD: ${SERVICE_PASSWORD_MOODLE-DB:-moodlepass}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-moodlepass}
     volumes:
       - db_data:/var/lib/mysql
 
@@ -27,7 +27,7 @@ services:
       MOODLE_DB_HOST: ${MOODLE_DB_HOST:-db}
       MOODLE_DB_NAME: ${MOODLE_DB_NAME:-moodle}
       MOODLE_DB_USER: ${MOODLE_DB_USER:-moodle}
-      MOODLE_DB_PASSWORD: ${SERVICE_PASSWORD_MOODLE-DB:-moodlepass}
+      MOODLE_DB_PASSWORD: ${MYSQL_PASSWORD:-moodlepass}
       MOODLE_DB_TYPE: ${MOODLE_DB_TYPE:-mariadb}
     volumes:
       - moodledata:/var/www/moodledata
