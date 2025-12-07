@@ -14,9 +14,20 @@ RUN apt-get update \
        libcurl4-openssl-dev \
        libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" intl gd zip mysqli soap xml mbstring curl opcache \
+    && docker-php-ext-install -j"$(nproc)" intl gd exif zip mysqli soap xml mbstring curl opcache \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
+
+# PHP configuration for Moodle (input limits, opcache)
+RUN { \
+    echo 'max_input_vars=5000'; \
+    echo 'opcache.enable=1'; \
+    echo 'opcache.enable_cli=1'; \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.max_accelerated_files=10000'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.save_comments=1'; \
+} > /usr/local/etc/php/conf.d/moodle.ini
 
 # Set working directory
 WORKDIR /var/www/html
@@ -32,8 +43,13 @@ RUN rm -rf ./* \
 RUN mkdir -p /var/www/moodledata \
     && chown -R www-data:www-data /var/www/html /var/www/moodledata
 
+# Copy custom entrypoint to adjust config.php (dbtype, wwwroot, reverse proxy flags)
+COPY moodle-entrypoint.sh /usr/local/bin/moodle-entrypoint.sh
+RUN chmod +x /usr/local/bin/moodle-entrypoint.sh
+
 # Expose Apache HTTP port
 EXPOSE 80
 
-# Use default Apache start command
+# Use custom entrypoint then start Apache
+ENTRYPOINT ["moodle-entrypoint.sh"]
 CMD ["apache2-foreground"]
