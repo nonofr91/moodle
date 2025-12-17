@@ -39,6 +39,9 @@ ARG MOODLE_BRANCH=MOODLE_404_STABLE
 RUN rm -rf ./* \
     && git clone --depth 1 -b "$MOODLE_BRANCH" https://github.com/moodle/moodle.git /var/www/html
 
+# Copy local plugins provided by this repository into the Moodle codebase
+COPY local/ /var/www/html/local/
+
 # Create moodledata directory for file storage
 RUN mkdir -p /var/www/moodledata \
     && chown -R www-data:www-data /var/www/html /var/www/moodledata
