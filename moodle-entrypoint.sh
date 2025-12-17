@@ -31,10 +31,14 @@ if [ -f "$CONFIG_FILE" ]; then
 
   # Determine target URL for wwwroot
   TARGET_URL=""
-  if [ -n "$COOLIFY_URL" ]; then
+  if [ -n "$SERVICE_URL_MOODLE" ]; then
+    TARGET_URL="$SERVICE_URL_MOODLE"
+  elif [ -n "$COOLIFY_URL" ]; then
     TARGET_URL="$COOLIFY_URL"
   elif [ -n "$MOODLE_WWWROOT" ]; then
     TARGET_URL="$MOODLE_WWWROOT"
+  elif [ -n "$SERVICE_FQDN_MOODLE" ]; then
+    TARGET_URL="https://${SERVICE_FQDN_MOODLE}"
   fi
 
   if [ -n "$TARGET_URL" ]; then
