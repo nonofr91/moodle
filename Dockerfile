@@ -15,7 +15,7 @@ RUN apt-get update \
        libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" intl gd exif zip mysqli soap xml mbstring curl opcache \
-    && a2enmod rewrite \
+    && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
 # PHP configuration for Moodle (input limits, opcache)
@@ -45,6 +45,10 @@ COPY local/ /var/www/html/local/
 # Create moodledata directory for file storage
 RUN mkdir -p /var/www/moodledata \
     && chown -R www-data:www-data /var/www/html /var/www/moodledata
+
+# Ensure Apache honors X-Forwarded-Proto=https (reverse proxy TLS termination)
+COPY apache-proxy-https.conf /etc/apache2/conf-available/proxy-https.conf
+RUN a2enconf proxy-https
 
 # Copy custom entrypoint to adjust config.php (dbtype, wwwroot, reverse proxy flags)
 COPY moodle-entrypoint.sh /usr/local/bin/moodle-entrypoint.sh
