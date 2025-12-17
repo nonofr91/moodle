@@ -10,11 +10,24 @@ if [ ! -f "$CONFIG_FILE" ] && [ -f "$PERSISTED_CONFIG" ]; then
   chown www-data:www-data "$CONFIG_FILE" || true
 fi
 
-# If config.php exists, fix dbtype and wwwroot/HTTPS, then persist it.
+# If config.php exists, fix DB params and wwwroot/HTTPS, then persist it.
 if [ -f "$CONFIG_FILE" ]; then
-  # Ensure dbtype is mariadb instead of mysql/mysqli
-  sed -i "s/'dbtype'[[:space:]]*=>[[:space:]]*'mysql'/'dbtype'    => 'mariadb'/" "$CONFIG_FILE" || true
-  sed -i "s/'dbtype'[[:space:]]*=>[[:space:]]*'mysqli'/'dbtype'    => 'mariadb'/" "$CONFIG_FILE" || true
+  DB_HOST="${MOODLE_DB_HOST:-db}"
+  DB_NAME="${MOODLE_DB_NAME:-moodle}"
+  DB_USER="${MOODLE_DB_USER:-moodle}"
+  DB_PASS="${MOODLE_DB_PASSWORD:-${MYSQL_PASSWORD:-}}"
+  DB_TYPE="${MOODLE_DB_TYPE:-mariadb}"
+
+  # Ensure dbtype matches the configured DB (default: mariadb).
+  sed -i "s#\\$CFG->dbtype[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbtype    = '${DB_TYPE}';#" "$CONFIG_FILE" || true
+
+  # Enforce DB connection settings from env vars (prevents localhost socket issues).
+  sed -i "s#\\$CFG->dbhost[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbhost    = '${DB_HOST}';#" "$CONFIG_FILE" || true
+  sed -i "s#\\$CFG->dbname[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbname    = '${DB_NAME}';#" "$CONFIG_FILE" || true
+  sed -i "s#\\$CFG->dbuser[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbuser    = '${DB_USER}';#" "$CONFIG_FILE" || true
+  if [ -n "$DB_PASS" ]; then
+    sed -i "s#\\$CFG->dbpass[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbpass    = '${DB_PASS}';#" "$CONFIG_FILE" || true
+  fi
 
   # Determine target URL for wwwroot
   TARGET_URL=""
