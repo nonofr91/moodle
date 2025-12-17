@@ -53,6 +53,12 @@ if [ -f "$CONFIG_FILE" ]; then
     printf "\n\\$CFG->sslproxy = true;\n" >> "$CONFIG_FILE"
   fi
 
+  if grep -q "\\$CFG->reverseproxy" "$CONFIG_FILE"; then
+    sed -i "s#\\$CFG->reverseproxy[[:space:]]*=[[:space:]]*.*;#\\$CFG->reverseproxy = true;#" "$CONFIG_FILE" || true
+  else
+    printf "\n\\$CFG->reverseproxy = true;\n" >> "$CONFIG_FILE"
+  fi
+
   # Persist config.php so it survives redeploys.
   cp "$CONFIG_FILE" "$PERSISTED_CONFIG" || true
   chown www-data:www-data "$PERSISTED_CONFIG" || true
