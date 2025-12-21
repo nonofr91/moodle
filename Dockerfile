@@ -42,6 +42,8 @@ RUN rm -rf ./* \
 # Copy local plugins provided by this repository into the Moodle codebase
 COPY local/ /var/www/html/local/
 
+COPY moodle-overrides/ /var/www/html/
+
 # Create moodledata directory for file storage
 RUN mkdir -p /var/www/moodledata \
     && chown -R www-data:www-data /var/www/html /var/www/moodledata
