@@ -30,6 +30,25 @@ services:
     volumes:
       - moodledata:/var/www/moodledata
 
+  moodlecron:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MOODLE_BRANCH: MOODLE_404_STABLE
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      MOODLE_DB_HOST: ${MOODLE_DB_HOST:-db}
+      MOODLE_DB_NAME: ${MOODLE_DB_NAME:-moodle}
+      MOODLE_DB_USER: ${MOODLE_DB_USER:-moodle}
+      MOODLE_DB_PASSWORD: ${MYSQL_PASSWORD:-moodlepass}
+      MOODLE_DB_TYPE: ${MOODLE_DB_TYPE:-mariadb}
+    volumes:
+      - moodledata:/var/www/moodledata
+    command: ["bash", "-lc", "while true; do php /var/www/html/admin/cli/cron.php >/dev/null 2>&1; sleep 60; done"]
+
 volumes:
   db_data:
   moodledata:
