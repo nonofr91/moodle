@@ -47,7 +47,7 @@ services:
       MOODLE_DB_TYPE: ${MOODLE_DB_TYPE:-mariadb}
     volumes:
       - moodledata:/var/www/moodledata
-    command: ["bash", "-lc", "while true; do if [ ! -f /var/www/html/config.php ] && [ -f /var/www/moodledata/config.php ]; then cp /var/www/moodledata/config.php /var/www/html/config.php; chown www-data:www-data /var/www/html/config.php || true; fi; php /var/www/html/admin/cli/cron.php > /var/www/moodledata/cron-last.log 2>&1; sleep 60; done"]
+    command: ["bash", "-lc", "while true; do if [ ! -f /var/www/html/config.php ] && [ -f /var/www/moodledata/config.php ]; then cp /var/www/moodledata/config.php /var/www/html/config.php; chown www-data:www-data /var/www/html/config.php || true; fi; php /var/www/html/admin/cli/cron.php > /var/www/moodledata/cron-last.log 2>&1; sleep 10; done"]
 
 volumes:
   db_data:
