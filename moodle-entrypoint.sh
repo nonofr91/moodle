@@ -19,14 +19,14 @@ if [ -f "$CONFIG_FILE" ]; then
   DB_TYPE="${MOODLE_DB_TYPE:-mariadb}"
 
   # Ensure dbtype matches the configured DB (default: mariadb).
-  sed -i "s#\\$CFG->dbtype[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbtype    = '${DB_TYPE}';#" "$CONFIG_FILE" || true
+  sed -i "s#\$CFG->dbtype[[:space:]]*=[[:space:]]*'.*';#\$CFG->dbtype    = '${DB_TYPE}';#" "$CONFIG_FILE" || true
 
   # Enforce DB connection settings from env vars (prevents localhost socket issues).
-  sed -i "s#\\$CFG->dbhost[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbhost    = '${DB_HOST}';#" "$CONFIG_FILE" || true
-  sed -i "s#\\$CFG->dbname[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbname    = '${DB_NAME}';#" "$CONFIG_FILE" || true
-  sed -i "s#\\$CFG->dbuser[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbuser    = '${DB_USER}';#" "$CONFIG_FILE" || true
+  sed -i "s#\$CFG->dbhost[[:space:]]*=[[:space:]]*'.*';#\$CFG->dbhost    = '${DB_HOST}';#" "$CONFIG_FILE" || true
+  sed -i "s#\$CFG->dbname[[:space:]]*=[[:space:]]*'.*';#\$CFG->dbname    = '${DB_NAME}';#" "$CONFIG_FILE" || true
+  sed -i "s#\$CFG->dbuser[[:space:]]*=[[:space:]]*'.*';#\$CFG->dbuser    = '${DB_USER}';#" "$CONFIG_FILE" || true
   if [ -n "$DB_PASS" ]; then
-    sed -i "s#\\$CFG->dbpass[[:space:]]*=[[:space:]]*'.*';#\\$CFG->dbpass    = '${DB_PASS}';#" "$CONFIG_FILE" || true
+    sed -i "s#\$CFG->dbpass[[:space:]]*=[[:space:]]*'.*';#\$CFG->dbpass    = '${DB_PASS}';#" "$CONFIG_FILE" || true
   fi
 
   # Determine target URL for wwwroot
@@ -45,18 +45,18 @@ if [ -f "$CONFIG_FILE" ]; then
     # Remove trailing slash for consistency
     TARGET_URL="${TARGET_URL%/}"
     # Replace existing wwwroot line
-    sed -i "s#\\$CFG->wwwroot[[:space:]]*=[[:space:]]*'.*';#\\$CFG->wwwroot   = '${TARGET_URL}';#" "$CONFIG_FILE" || true
+    sed -i "s#\$CFG->wwwroot[[:space:]]*=[[:space:]]*'.*';#\$CFG->wwwroot   = '${TARGET_URL}';#" "$CONFIG_FILE" || true
   fi
 
   # Ensure sslproxy flag (reverseproxy left to manual config)
-  if ! grep -q "\\$CFG->sslproxy" "$CONFIG_FILE"; then
-    printf "\n\\$CFG->sslproxy = true;\n" >> "$CONFIG_FILE"
+  if ! grep -q '\$CFG->sslproxy' "$CONFIG_FILE"; then
+    printf '\n$CFG->sslproxy = true;\n' >> "$CONFIG_FILE"
   fi
 
-  if grep -q "\\$CFG->reverseproxy" "$CONFIG_FILE"; then
-    sed -i "s#\\$CFG->reverseproxy[[:space:]]*=[[:space:]]*.*;#\\$CFG->reverseproxy = true;#" "$CONFIG_FILE" || true
+  if grep -q '\$CFG->reverseproxy' "$CONFIG_FILE"; then
+    sed -i "s#\$CFG->reverseproxy[[:space:]]*=[[:space:]]*.*;#\$CFG->reverseproxy = true;#" "$CONFIG_FILE" || true
   else
-    printf "\n\\$CFG->reverseproxy = true;\n" >> "$CONFIG_FILE"
+    printf '\n$CFG->reverseproxy = true;\n' >> "$CONFIG_FILE"
   fi
 
   # Persist config.php so it survives redeploys.
