@@ -1,0 +1,166 @@
+/* stylelint-disable color-hex-length */
+/**
+ * Default preset file.
+ *
+ * Use this space to customise variables, create mixins and override SCSS.
+ */
+
+// Colors
+$gray-dark:                 #373a3c !default;
+$gray:                      #55595c !default;
+$gray-light:                #818a91 !default;
+$gray-lighter:              #eceeef !default;
+$gray-lightest:             #f7f7f9 !default;
+
+$brand-primary:             #00AEEF !default;
+$brand-success:             #77b300 !default;
+$brand-warning:             #ff8800 !default;
+$brand-danger:              #ff4136 !default;
+$brand-inverse:             $gray-dark !default;
+$navbar-height:             50px !default;
+
+// Spacing
+$spacer:   1rem !default;
+$spacer-x: $spacer !default;
+$spacer-y: $spacer !default;
+$border-width: 1px !default;
+
+// Body
+$body-bg:    #F3F4F6 !default;
+$body-color: #111827 !default;
+
+// Typography
+$font-family-sans-serif: "Open Sans", "Helvetica Neue", Arial, sans-serif !default;
+$font-size-root: 14px !default;
+
+// Tables
+$table-bg:                      transparent !default;
+$table-bg-accent:               #fafafa !default;
+$table-bg-hover:                lighten($brand-primary, 55%) !default;
+$table-bg-active:               $table-bg-hover !default;
+$table-border-color:            #f4f4f4 !default;
+
+// Dropdowns
+$dropdown-border-color:          #e2e2e2 !default;
+$dropdown-link-color:            $body-color;
+
+// Navbar
+$navbar-light-color:                rgba(255, 255, 255, .92) !default;
+$navbar-light-hover-color:          rgba(214, 242, 255, 1) !default;
+$navbar-light-active-color:         rgba(214, 242, 255, 1) !default;
+
+// Cards
+$card-border-radius:       16px !default;
+$card-border-color:        #e5e7eb !default;
+
+// Forms / Buttons
+$border-radius:            12px !default;
+$btn-border-radius:        10px !default;
+$input-border-radius:      10px !default;
+
+// Breadcrumbs
+$breadcrumb-bg:                 transparent !default;
+$breadcrumb-padding-x:          0 !default;
+$breadcrumb-divider: "/" !default;
+$breadcrumb-divider-rtl: "/" !default;
+
+// Import everything.
+@import "moodle";
+
+$afir-primary: #0F2A3D;
+$afir-accent: $brand-primary;
+
+/**
+ * Navigation bar identity.
+ */
+.navbar-light {
+    background-color: $afir-primary;
+    border-bottom: 0;
+    box-shadow: 0 10px 26px rgba(15, 42, 61, 0.18);
+
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navbar-brand {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-right: $spacer * 2;
+        color: #fff;
+        background-color: transparent;
+        @include hover-focus {
+            color: rgba(214, 242, 255, 1);
+        }
+        &.has-logo {
+            color: #fff;
+            background-color: transparent;
+            @include hover-focus {
+                color: rgba(214, 242, 255, 1);
+            }
+        }
+    }
+
+    .navbar-nav {
+        .nav-item + .nav-item {
+            margin-left: $spacer * 2;
+        }
+        .nav-link {
+            font-size: $font-size-sm;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+.btn {
+    border-radius: $btn-border-radius;
+    font-weight: 600;
+}
+
+.btn-primary,
+input[type="submit"].btn-primary {
+    background-color: $afir-accent;
+    border-color: $afir-accent;
+    box-shadow: 0 10px 20px rgba(0, 174, 239, 0.18);
+}
+
+.btn-primary:hover,
+input[type="submit"].btn-primary:hover {
+    background-color: darken($afir-accent, 8%);
+    border-color: darken($afir-accent, 8%);
+}
+
+.form-control,
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    border-radius: $input-border-radius;
+    border: 1px solid #d1d5db;
+}
+
+.form-control:focus {
+    border-color: rgba(0, 174, 239, 0.55);
+    box-shadow: 0 0 0 0.2rem rgba(0, 174, 239, 0.18);
+}
+
+.card {
+    border-radius: $card-border-radius;
+    border: 1px solid $card-border-color;
+    box-shadow: 0 12px 34px rgba(17, 24, 39, 0.06);
+}
+
+#page-login-index #page {
+    background: linear-gradient(180deg, rgba(15, 42, 61, 0.74), rgba(15, 42, 61, 0.22)) !important;
+    min-height: 100vh;
+}
+
+#page-login-index .card {
+    border-radius: 18px;
+    box-shadow: 0 28px 80px rgba(17, 24, 39, 0.25);
+}
+
+#page-footer {
+    color: #6b7280;
+}
