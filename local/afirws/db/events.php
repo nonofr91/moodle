@@ -2,13 +2,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$observers = [
+$callbacks = [
     [
-        'eventname' => '\core\event\course_viewed',
-        'callback' => 'local_afirws\observer::redirect_non_logged_users',
-    ],
-    [
-        'eventname' => '\core\event\user_loggedout',
-        'callback' => 'local_afirws\observer::redirect_to_landing',
+        'hook' => \core\hook\output\before_http_headers::class,
+        'callback' => [\local_afirws\hook\before_http_headers::class, 'callback'],
+        'priority' => 0,
     ],
 ];
