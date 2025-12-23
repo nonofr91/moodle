@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for the AFI Remote WS plugin
+ * Hook pour ajouter la page d'accueil personnalisée
  *
  * @package    local_afirws
  * @copyright  2025 AFI Formation
@@ -24,8 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122002;  // Correction de l'erreur d'initialisation de la page d'accueil
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+/**
+ * Callback qui s'exécute après la configuration du site
+ */
+function local_afirws_after_config() {
+    global $CFG, $PAGE;
+    
+    // Vérifier si nous sommes sur la page d'accueil et que l'utilisateur n'est pas connecté
+    if ($PAGE->pagetype === 'site-index' && !isloggedin() && !isguestuser()) {
+        redirect(new moodle_url('/local/afirws/landing.php'));
+    }
+}

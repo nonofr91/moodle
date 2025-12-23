@@ -27,8 +27,5 @@ $capabilities = [
     ],
 ];
 
-// Ajout de la page au sélecteur de page d'accueil
-$ADMIN->add('root', new admin_externalpage('local_afirws_landing', 
-    get_string('pluginname', 'local_afirws'), 
-    new moodle_url('/local/afirws/landing.php'),
-    'local/afirws:view'));
+// La page sera ajoutée via le hook approprié dans lib.php
+// pour éviter les problèmes de contexte d'initialisation
