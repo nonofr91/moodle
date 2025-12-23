@@ -173,6 +173,23 @@ $afir-accent: $primary;
     a {
         color: #fff !important;
     }
+
+    .moremenu .nav-link,
+    .primary-navigation .nav-link {
+        border-radius: 6px;
+    }
+
+    .moremenu .nav-link:hover,
+    .moremenu .nav-link:focus,
+    .moremenu .nav-link.active,
+    .moremenu .nav-link[aria-current="true"],
+    .primary-navigation .nav-link:hover,
+    .primary-navigation .nav-link:focus,
+    .primary-navigation .nav-link.active,
+    .primary-navigation .nav-link[aria-current="true"] {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        color: #fff !important;
+    }
 }
 
 .btn {
