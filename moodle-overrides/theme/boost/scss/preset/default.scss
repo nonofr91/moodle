@@ -174,6 +174,25 @@ $afir-accent: $primary;
         color: #fff !important;
     }
 
+    .navbar-brand {
+        position: relative;
+        padding-left: 3.25rem;
+    }
+
+    .navbar-brand::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2.5rem;
+        height: 2.5rem;
+        background-image: url('/local/afirws/assets/AFIR_col_100.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
     .moremenu .nav-link,
     .primary-navigation .nav-link {
         border-radius: 6px;
@@ -224,6 +243,50 @@ input[type="submit"].btn-primary:hover {
 #page-login-index .card {
     border-radius: 18px;
     box-shadow: 0 28px 80px rgba(17, 24, 39, 0.25);
+}
+
+#page-login-index .card::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 64px;
+    margin-bottom: 12px;
+    background-image: url('/local/afirws/assets/AFIR_col_100.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.afir-hero {
+    color: #fff;
+    background: linear-gradient(135deg, rgba(15, 42, 61, 0.95), rgba(15, 42, 61, 0.65));
+    box-shadow: 0 24px 80px rgba(15, 42, 61, 0.18);
+}
+
+.afir-hero-kicker {
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.06em;
+}
+
+.afir-hero-panel {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+}
+
+.afir-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 174, 239, 0.18);
+    color: #0F2A3D;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.afir-cta {
+    background: #fff;
+    box-shadow: 0 18px 60px rgba(17, 24, 39, 0.10);
 }
 
 #page-footer {
