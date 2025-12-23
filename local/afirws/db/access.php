@@ -14,18 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Version details for the AFI Remote WS plugin
- *
- * @package    local_afirws
- * @copyright  2025 AFI Formation
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122001;  // Ajout du support pour la page d'accueil personnalisée
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+$capabilities = [
+    'local/afirws:view' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'guest' => CAP_ALLOW,
+            'user' => CAP_ALLOW,
+        ],
+    ],
+];
+
+// Ajout de la page au sélecteur de page d'accueil
+$ADMIN->add('root', new admin_externalpage('local_afirws_landing', 
+    get_string('pluginname', 'local_afirws'), 
+    new moodle_url('/local/afirws/landing.php'),
+    'local/afirws:view'));
