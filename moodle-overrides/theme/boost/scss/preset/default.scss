@@ -163,6 +163,44 @@ body {
 $afir-primary: #0F2A3D;
 $afir-accent: $primary;
 
+.dropdown-menu {
+    background-color: $white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    min-width: 200px;
+    
+    .dropdown-item {
+        color: $gray-900;
+        padding: 0.5rem 1.5rem;
+        
+        &:hover, &:focus {
+            background-color: $gray-100;
+            color: $afir-primary;
+        }
+        
+        i {
+            color: $afir-primary;
+            margin-right: 0.5rem;
+        }
+    }
+    
+    .dropdown-divider {
+        border-top: 1px solid $gray-200;
+        margin: 0.5rem 0;
+    }
+    
+    .dropdown-header {
+        color: $gray-600;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.5rem 1.5rem;
+    }
+}
+
 .navbar {
     background-color: $afir-primary !important;
     box-shadow: 0 10px 26px rgba(15, 42, 61, 0.18);
@@ -208,6 +246,77 @@ $afir-accent: $primary;
     .primary-navigation .nav-link[aria-current="true"] {
         background-color: rgba(255, 255, 255, 0.12) !important;
         color: #fff !important;
+    }
+    
+    .usermenu {
+        .dropdown-toggle {
+            color: $white !important;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            
+            &:hover, &:focus, &[aria-expanded="true"] {
+                background-color: rgba(255, 255, 255, 0.15) !important;
+                text-decoration: none;
+            }
+            
+            .usertext {
+                margin-left: 0.5rem;
+                max-width: 150px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .avatar {
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                width: 32px;
+                height: 32px;
+            }
+        }
+        
+        .dropdown-menu {
+            background-color: $white !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+            border-radius: 8px !important;
+            padding: 0.5rem 0 !important;
+            margin-top: 0.5rem !important;
+            min-width: 240px !important;
+            
+            .dropdown-item {
+                color: $gray-900 !important;
+                padding: 0.5rem 1.5rem !important;
+                font-size: 0.9rem;
+                
+                &:hover, &:focus {
+                    background-color: $gray-100 !important;
+                    color: $afir-primary !important;
+                }
+                
+                i {
+                    color: $afir-primary !important;
+                    margin-right: 0.5rem !important;
+                    width: 20px;
+                    text-align: center;
+                }
+            }
+            
+            .dropdown-divider {
+                border-top: 1px solid $gray-200 !important;
+                margin: 0.5rem 0 !important;
+            }
+            
+            .dropdown-header {
+                color: $gray-600 !important;
+                font-size: 0.75rem !important;
+                font-weight: 600 !important;
+                text-transform: uppercase !important;
+                padding: 0.5rem 1.5rem !important;
+            }
+        }
     }
 }
 
