@@ -53,10 +53,18 @@ if [ -f "$CONFIG_FILE" ]; then
     printf '\n$CFG->sslproxy = true;\n' >> "$CONFIG_FILE"
   fi
 
+  REVERSEPROXY="${MOODLE_REVERSEPROXY:-false}"
+  if [ "$REVERSEPROXY" = "1" ]; then
+    REVERSEPROXY="true"
+  fi
+  if [ "$REVERSEPROXY" != "true" ]; then
+    REVERSEPROXY="false"
+  fi
+
   if grep -q '\$CFG->reverseproxy' "$CONFIG_FILE"; then
-    sed -i "s#\$CFG->reverseproxy[[:space:]]*=[[:space:]]*.*;#\$CFG->reverseproxy = true;#" "$CONFIG_FILE" || true
+    sed -i "s#\$CFG->reverseproxy[[:space:]]*=[[:space:]]*.*;#\$CFG->reverseproxy = ${REVERSEPROXY};#" "$CONFIG_FILE" || true
   else
-    printf '\n$CFG->reverseproxy = true;\n' >> "$CONFIG_FILE"
+    printf "\n\$CFG->reverseproxy = ${REVERSEPROXY};\n" >> "$CONFIG_FILE"
   fi
 
   # Persist config.php so it survives redeploys.
