@@ -366,6 +366,20 @@ input[type="submit"].btn-primary:hover {
     background-size: contain;
 }
 
+// Masquer le message "Instances Reactive" qui s'affiche en bas de page
+div[data-for="loaders"] {
+    display: none !important;
+}
+
+div[data-for="subpanel"] {
+    display: none !important;
+}
+
+// Masquer également les éléments contenant "Instances Reactive"
+div:has(> div:contains("Instances Reactive")) {
+    display: none !important;
+}
+
 .afir-hero {
     color: #fff;
     background: linear-gradient(135deg, rgba(15, 42, 61, 0.95), rgba(15, 42, 61, 0.65));
