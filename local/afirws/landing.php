@@ -17,17 +17,20 @@
 require_once('../../config.php');
 require_login(null, false);
 
+// Définir le contexte de la page
+$context = context_system::instance();
+$PAGE->set_context($context);
+
 $PAGE->set_url('/local/afirws/landing.php');
 $PAGE->set_pagelayout('frontpage');
-$PAGE->set_title(get_string('pluginname', 'local_afirws'));
-$PAGE->set_heading(get_string('pluginname', 'local_afirws'));
 
 // Désactiver la barre de navigation standard
 $PAGE->navbar->ignore_active();
-$PAGE->navbar->clear();
+$PAGE->navbar->remove('home');
 
-// Désactiver le pied de page standard
-$PAGE->set_heading('');
+// Définir le titre et l'en-tête de la page
+$PAGE->set_title(get_string('pluginname', 'local_afirws'));
+$PAGE->set_heading(get_string('pluginname', 'local_afirws'));
 
 // Ajouter du contenu personnalisé
 $content = html_writer::tag('h1', 'Bienvenue sur AFI Formation');
