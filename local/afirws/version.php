@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_afirws';
-$plugin->version = 2025122006;  // Implémentation de la page de présentation via le thème
+$plugin->version = 2025122007;  // Template override de la page d'accueil et restriction d'accès
 $plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '1.0.0';

@@ -28,23 +28,8 @@ defined('MOODLE_INTERNAL') || die();
  * Callback qui s'exécute après la configuration du site
  */
 function local_afirws_after_config() {
-    global $CFG, $PAGE;
+    global $CFG;
     
-    // Vérifier si nous sommes sur la page d'accueil et que l'utilisateur n'est pas connecté
-    if ($PAGE->pagetype === 'site-index' && !isloggedin() && !isguestuser()) {
-        redirect(new moodle_url('/local/afirws/landing.php'));
-    }
-}
-
-/**
- * Callback qui s'exécute avant l'authentification
- */
-function local_afirws_require_login() {
-    global $PAGE, $CFG;
-    
-    // Si l'utilisateur n'est pas connecté et qu'il accède à la page d'accueil
-    if (!isloggedin() && !isguestuser() && $PAGE->pagetype === 'site-index') {
-        // Rediriger vers la page de destination au lieu de la page de connexion
-        redirect(new moodle_url('/local/afirws/landing.php'));
-    }
+    // Inclure le contrôle d'accès
+    require_once(__DIR__ . '/access.php');
 }
