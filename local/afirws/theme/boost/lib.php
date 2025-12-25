@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for the AFI Remote WS plugin
+ * Bibliothèque du thème Boost personnalisé
  *
  * @package    local_afirws
  * @copyright  2025 AFI Formation
@@ -24,8 +24,18 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122006;  // Implémentation de la page de présentation via le thème
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+/**
+ * Factory pour le renderer personnalisé
+ */
+class theme_overridden_renderer_factory extends \theme_boost\output\renderer_factory {
+    
+    /**
+     * Créer le renderer personnalisé
+     */
+    public function get_renderer(\moodle_page $page, $component, $subtype = null, $target = null) {
+        if ($component === 'core' && $subtype === null) {
+            return new \theme_boost\core_renderer($page, $target);
+        }
+        return parent::get_renderer($page, $component, $subtype, $target);
+    }
+}
