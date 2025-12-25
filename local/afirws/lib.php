@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Hook pour ajouter la page d'accueil personnalisée
+ * Hook pour le plugin local_afirws
  *
  * @package    local_afirws
  * @copyright  2025 AFI Formation
@@ -30,6 +30,12 @@ defined('MOODLE_INTERNAL') || die();
 function local_afirws_after_config() {
     global $CFG;
     
-    // Inclure le contrôle d'accès
-    require_once(__DIR__ . '/access.php');
+    // S'assurer que les paramètres sont corrects
+    if (!isset($CFG->forcelogin)) {
+        $CFG->forcelogin = false;
+    }
+    
+    if (!isset($CFG->autologinguests)) {
+        $CFG->autologinguests = true;
+    }
 }

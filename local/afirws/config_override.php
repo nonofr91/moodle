@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Installation du plugin local_afirws
+ * Configuration override pour le plugin local_afirws
  *
  * @package    local_afirws
  * @copyright  2025 AFI Formation
@@ -24,17 +24,22 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-function xmldb_local_afirws_install() {
-    global $CFG, $DB;
-    
-    // Configuration pour permettre aux visiteurs de voir la page d'accueil
-    set_config('forcelogin', 0);
-    set_config('autologinguests', 1);
-    
-    // Définir la page d'accueil personnalisée
-    if (!isset($CFG->defaulthomepage)) {
-        set_config('defaulthomepage', HOMEPAGE_SITE);
-    }
-    
-    return true;
+// Désactiver forcelogin pour permettre aux visiteurs de voir la page d'accueil
+if (!isset($CFG->forcelogin)) {
+    $CFG->forcelogin = false;
+}
+
+// Activer l'auto-login pour les invités
+if (!isset($CFG->autologinguests)) {
+    $CFG->autologinguests = true;
+}
+
+// Définir le rôle par défaut pour les invités
+if (!isset($CFG->guestroleid)) {
+    $CFG->guestroleid = 6; // ID du rôle guest par défaut dans Moodle
+}
+
+// Définir le rôle par défaut pour la page d'accueil
+if (!isset($CFG->defaultfrontpageroleid)) {
+    $CFG->defaultfrontpageroleid = 6; // Rôle guest pour la page d'accueil
 }
