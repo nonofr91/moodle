@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Hook pour ajouter la page d'accueil personnalisée
+ * Configuration pour le plugin local_afirws
  *
  * @package    local_afirws
  * @copyright  2025 AFI Formation
@@ -24,27 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * Callback qui s'exécute après la configuration du site
- */
-function local_afirws_after_config() {
-    global $CFG, $PAGE;
-    
-    // Vérifier si nous sommes sur la page d'accueil et que l'utilisateur n'est pas connecté
-    if ($PAGE->pagetype === 'site-index' && !isloggedin() && !isguestuser()) {
-        redirect(new moodle_url('/local/afirws/landing.php'));
-    }
-}
-
-/**
- * Callback qui s'exécute avant l'authentification
- */
-function local_afirws_require_login() {
-    global $PAGE, $CFG;
-    
-    // Si l'utilisateur n'est pas connecté et qu'il accède à la page d'accueil
-    if (!isloggedin() && !isguestuser() && $PAGE->pagetype === 'site-index') {
-        // Rediriger vers la page de destination au lieu de la page de connexion
-        redirect(new moodle_url('/local/afirws/landing.php'));
+// Intercepter la redirection vers la page de connexion pour les utilisateurs non connectés
+if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], 'login') === false) {
+    // Si l'utilisateur accède à la page d'accueil et n'est pas connecté
+    if (strpos($_SERVER['REQUEST_URI'], '/') !== false && empty($_GET)) {
+        // Vérifier si l'utilisateur n'est pas déjà sur la page de landing
+        if (strpos($_SERVER['REQUEST_URI'], 'local/afirws/landing.php') === false) {
+            // Rediriger vers la page de landing
+            header('Location: /local/afirws/landing.php');
+            exit;
+        }
     }
 }
