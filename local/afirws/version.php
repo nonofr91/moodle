@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_afirws';
-$plugin->version = 2025122003;  // Correction des erreurs d'affichage de la page d'accueil
+$plugin->version = 2025122004;  // Correction de l'erreur de navigation
 $plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '1.0.0';

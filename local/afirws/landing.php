@@ -26,7 +26,7 @@ $PAGE->set_pagelayout('frontpage');
 
 // Désactiver la barre de navigation standard
 $PAGE->navbar->ignore_active();
-$PAGE->navbar->remove('home');
+// Ne pas essayer de supprimer des éléments de navigation pour éviter les erreurs
 
 // Définir le titre et l'en-tête de la page
 $PAGE->set_title(get_string('pluginname', 'local_afirws'));
