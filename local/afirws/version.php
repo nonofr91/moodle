@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_afirws';
-$plugin->version = 2025122013;  // Migration vers le nouveau système de hooks Moodle 4.4
+$plugin->version = 2025122014;  // Correction du nom de classe pour éviter les conflits
 $plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '1.0.0';
