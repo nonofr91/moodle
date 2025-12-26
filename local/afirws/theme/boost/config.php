@@ -24,6 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Définir le renderer personnalisé
+// Activer les surcharges de templates
+$THEME->name = 'boost';
+$THEME->parents = ['boost'];
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->csspostprocess = 'theme_boost_process_css';
+
+// S'assurer que les surcharges de templates sont bien chargées
+$THEME->doctype = 'html5';
+$THEME->supportscssoptimisation = true;
+$THEME->enablesource = true;
