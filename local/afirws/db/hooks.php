@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for the AFI Remote WS plugin
+ * Hook callbacks for local_afirws
  *
  * @package    local_afirws
  * @copyright  2025 AFI Formation
@@ -24,8 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122013;  // Migration vers le nouveau système de hooks Moodle 4.4
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+$callbacks = [
+    [
+        'hook' => \core\hook\output\before_http_headers::class,
+        'callback' => \local_afirws\hook\before_http_headers::class . '::callback',
+        'priority' => 100,
+    ],
+];

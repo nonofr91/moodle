@@ -14,18 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace local_afirws\hook;
+
+use core\hook\output\before_http_headers;
+
 /**
- * Version details for the AFI Remote WS plugin
- *
- * @package    local_afirws
- * @copyright  2025 AFI Formation
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Hook callback for before_http_headers
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122013;  // Migration vers le nouveau système de hooks Moodle 4.4
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+class before_http_headers implements before_http_headers {
+    
+    /**
+     * Callback to redirect guests to landing page
+     */
+    public static function callback(before_http_headers $hook): void {
+        global $PAGE;
+        
+        // Only redirect on the homepage and for non-logged-in users
+        if (!isloggedin() && isset($PAGE) && $PAGE->pagetype === 'site-index') {
+            // Redirect to landing page
+            redirect(new \moodle_url('/local/afirws/landing_redirect.php'));
+            exit;
+        }
+    }
+}
