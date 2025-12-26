@@ -21,7 +21,7 @@ use core\hook\output\before_http_headers;
 /**
  * Hook callback for before_http_headers
  */
-class guest_redirect implements before_http_headers {
+class guest_redirect {
     
     /**
      * Callback to redirect guests to landing page
