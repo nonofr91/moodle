@@ -39,3 +39,17 @@ function local_afirws_after_config() {
         $CFG->autologinguests = true;
     }
 }
+
+/**
+ * Callback qui s'exécute avant l'affichage de la page
+ */
+function local_afirws_before_http_headers($hook) {
+    global $PAGE, $CFG;
+    
+    // Si l'utilisateur n'est pas connecté et qu'on est sur la page d'accueil
+    if (!isloggedin() && !isguestuser() && $PAGE->pagetype === 'site-index') {
+        // Rediriger vers notre page de présentation
+        redirect(new moodle_url('/local/afirws/landing_redirect.php'));
+        exit;
+    }
+}
