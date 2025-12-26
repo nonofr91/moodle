@@ -15,17 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for the AFI Remote WS plugin
- *
- * @package    local_afirws
- * @copyright  2025 AFI Formation
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Redirection vers la landing page pour les visiteurs non connectés
  */
 
-defined('MOODLE_INTERNAL') || die();
+require_once(dirname(__FILE__) . '/../../config.php');
 
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122012;  // Ajout de la redirection automatique vers la landing page
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+// Si l'utilisateur n'est pas connecté, rediriger vers la landing page
+if (!isloggedin() || isguestuser()) {
+    redirect(new moodle_url('/local/afirws/landing_redirect.php'));
+    exit;
+}
+
+// Sinon, rediriger vers la page d'accueil Moodle normale
+redirect(new moodle_url('/'));
+exit;

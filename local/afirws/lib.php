@@ -38,4 +38,21 @@ function local_afirws_after_config() {
     if (!isset($CFG->autologinguests)) {
         $CFG->autologinguests = true;
     }
+    
+    // Définir la page d'accueil personnalisée
+    $CFG->customhomepage = '/local/afirws/index_redirect.php';
+}
+
+/**
+ * Callback qui s'exécute avant l'affichage de la page
+ */
+function local_afirws_before_http_headers() {
+    global $PAGE, $CFG;
+    
+    // Si l'utilisateur n'est pas connecté et qu'on est sur la page d'accueil
+    if (!isloggedin() && !isguestuser() && isset($PAGE) && $PAGE->pagetype === 'site-index') {
+        // Rediriger vers notre page de présentation
+        redirect(new moodle_url('/local/afirws/landing_redirect.php'));
+        exit;
+    }
 }
