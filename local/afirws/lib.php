@@ -39,9 +39,6 @@ function local_afirws_after_config() {
         $CFG->autologinguests = true;
     }
     
-    // Forcer le thème Boost (déjà actif)
-    $CFG->theme = 'boost';
-    
-    // Activer le mode designer pour les overrides de templates
-    $CFG->themedesignermode = true;
+    // Rediriger les visiteurs vers notre index.php personnalisé
+    $CFG->customhomepage = '/local/afirws/index.php';
 }
