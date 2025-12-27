@@ -39,6 +39,9 @@ function local_afirws_after_config() {
         $CFG->autologinguests = true;
     }
     
-    // Définir la page d'accueil personnalisée
-    $CFG->customhomepage = '/local/afirws/landing_redirect.php';
+    // Forcer le thème Boost (déjà actif)
+    $CFG->theme = 'boost';
+    
+    // Activer le mode designer pour les overrides de templates
+    $CFG->themedesignermode = true;
 }

@@ -15,17 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for the AFI Remote WS plugin
+ * Configuration du thème AFI Boost personnalisé
  *
- * @package    local_afirws
+ * @package    theme_afirws_boost
  * @copyright  2025 AFI Formation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_afirws';
-$plugin->version = 2025122022;  // Override du template index.mustache dans le thème Boost
-$plugin->requires = 2023100900; // Moodle 4.3.0 et supérieur
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+// Thème enfant de Boost
+$THEME->name = 'afirws_boost';
+$THEME->parents = ['boost'];
+$THEME->rendererfactory = 'theme_overridden_renderer_factory';
+$THEME->csspostprocess = 'theme_boost_process_css';
+
+// Activer les surcharges de templates
+$THEME->doctype = 'html5';
+$THEME->supportscssoptimisation = true;
+$THEME->enablesource = true;
