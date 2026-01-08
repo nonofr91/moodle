@@ -1,0 +1,417 @@
+/* stylelint-disable color-hex-length */
+/**
+ * Default preset file.
+ *
+ * Use this space to customise variables, create mixins and override SCSS.
+ */
+
+// Bootstrap variables
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #8f959e !default;
+$gray-600: #6a737b !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #1d2125 !default;
+$black:    #000 !default;
+
+$blue:    #00AEEF !default;
+$indigo:  #6610f2 !default;
+$purple:  #613d7c !default;
+$pink:    #db1a74 !default;
+$red:     #ca3120 !default;
+$orange:  #f0ad4e !default;
+$yellow:  #ff7518 !default;
+$green:   #357a32 !default;
+$teal:    #20c997 !default;
+$cyan:    #008196 !default;
+
+$primary:       $blue !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$secondary:     $gray-400 !default;
+
+$info-outline:    #1f7e9a;
+$warning-outline: #a6670e;
+
+// Tables
+$table-accent-bg:             rgba($black, .03) !default;
+
+// Options
+$enable-responsive-font-sizes: true !default;
+
+// Body
+$body-bg:       #F3F4F6 !default;
+$body-color:    $gray-900 !default;
+
+// Fonts
+$font-size-base: 0.9375rem !default;
+$rfs-base-font-size: 0.9rem !default;
+$headings-font-weight:   700 !default;
+
+// Navbar
+$navbar-dark-hover-color:           rgba($white, 1) !default;
+$navbar-light-color:                rgba($black, 0.6) !default;
+$navbar-light-hover-color:          rgba($black, .9) !default;
+
+// Breadcrumbs
+$breadcrumb-padding-y:              .5rem !default;
+$breadcrumb-padding-x:              0 !default;
+$breadcrumb-item-padding:           .5rem !default;
+$breadcrumb-margin-bottom:          0 !default;
+$breadcrumb-bg:                     transparent !default;
+$breadcrumb-divider: "/" !default;
+$breadcrumb-divider-rtl: "/" !default;
+
+// Alerts
+$alert-border-width:                0 !default;
+
+$card-group-margin: .25rem;
+
+// Toasts
+$toast-color:                       $white !default;
+$toast-background-color:            rgba($gray-900, .95) !default;
+$toast-header-color:                $gray-100 !default;
+$toast-header-background-color:     rgba($white, .1) !default;
+
+// Custom control size
+$custom-control-indicator-size: 1.25rem;
+
+$input-btn-focus-color: rgba($primary, .75) !default;
+
+$input-border-color: $gray-500 !default;
+
+$dropdown-link-hover-color: $white;
+$dropdown-link-hover-bg: $primary;
+
+$popover-max-width: 300px !default;
+
+$border-radius: .75rem !default;
+$border-radius-lg: .9rem !default;
+
+// stylelint-disable
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+), $theme-colors);
+// stylelint-enable
+
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 2),
+    6: ($spacer * 3)
+) !default;
+
+// Import FontAwesome.
+@import "fontawesome";
+
+// Import All of Bootstrap
+@import "bootstrap";
+
+// Import Core moodle CSS
+@import "moodle";
+
+// Preset CSS
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+}
+
+// Rounded user pictures
+.userpicture {
+    border-radius: 50%;
+}
+
+// Reset the default styling back to the bootstrap defaults for
+// the secondary outline button because gray-200 is much too light
+// for an outline button.
+.btn-outline-secondary {
+    @include button-outline-variant($gray-600);
+    border-color: $gray-600;
+}
+
+.btn-outline-info {
+    @include button-outline-variant($info-outline);
+}
+
+.btn-outline-warning {
+    @include button-outline-variant($warning-outline);
+}
+
+// --- AFIR overrides (after imports) ---
+
+$afir-primary: #0F2A3D;
+$afir-accent: $primary;
+
+.dropdown-menu {
+    background-color: $white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    min-width: 200px;
+    
+    .dropdown-item {
+        color: $gray-900;
+        padding: 0.5rem 1.5rem;
+        
+        &:hover, &:focus {
+            background-color: $gray-100;
+            color: $afir-primary;
+        }
+        
+        i {
+            color: $afir-primary;
+            margin-right: 0.5rem;
+        }
+    }
+    
+    .dropdown-divider {
+        border-top: 1px solid $gray-200;
+        margin: 0.5rem 0;
+    }
+    
+    .dropdown-header {
+        color: $gray-600;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+.navbar {
+    background-color: $afir-primary !important;
+    box-shadow: 0 10px 26px rgba(15, 42, 61, 0.18);
+
+    .navbar-brand,
+    .nav-link,
+    .dropdown-toggle,
+    a {
+        color: #fff !important;
+    }
+
+    .navbar-brand {
+        position: relative;
+        padding-left: 3.25rem;
+    }
+
+    .navbar-brand::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2.5rem;
+        height: 2.5rem;
+        background-image: url('/local/afirws/assets/AFIR_col_100.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .moremenu .nav-link,
+    .primary-navigation .nav-link {
+        border-radius: 6px;
+    }
+
+    .moremenu .nav-link:hover,
+    .moremenu .nav-link:focus,
+    .moremenu .nav-link.active,
+    .moremenu .nav-link[aria-current="true"],
+    .primary-navigation .nav-link:hover,
+    .primary-navigation .nav-link:focus,
+    .primary-navigation .nav-link.active,
+    .primary-navigation .nav-link[aria-current="true"] {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        color: #fff !important;
+    }
+    
+    .usermenu {
+        .dropdown-toggle {
+            color: $white !important;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            
+            &:hover, &:focus, &[aria-expanded="true"] {
+                background-color: rgba(255, 255, 255, 0.15) !important;
+                text-decoration: none;
+            }
+            
+            .usertext {
+                margin-left: 0.5rem;
+                max-width: 150px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .avatar {
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                width: 32px;
+                height: 32px;
+            }
+        }
+        
+        .dropdown-menu {
+            background-color: $white !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+            border-radius: 8px !important;
+            padding: 0.5rem 0 !important;
+            margin-top: 0.5rem !important;
+            min-width: 240px !important;
+            
+            .dropdown-item {
+                color: $gray-900 !important;
+                padding: 0.5rem 1.5rem !important;
+                font-size: 0.9rem;
+                
+                &:hover, &:focus {
+                    background-color: $gray-100 !important;
+                    color: $afir-primary !important;
+                }
+                
+                i {
+                    color: $afir-primary !important;
+                    margin-right: 0.5rem !important;
+                    width: 20px;
+                    text-align: center;
+                }
+            }
+            
+            .dropdown-divider {
+                border-top: 1px solid $gray-200 !important;
+                margin: 0.5rem 0 !important;
+            }
+            
+            .dropdown-header {
+                color: $gray-600 !important;
+                font-size: 0.75rem !important;
+                font-weight: 600 !important;
+                text-transform: uppercase !important;
+                padding: 0.5rem 1.5rem !important;
+            }
+        }
+    }
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-primary,
+input[type="submit"].btn-primary {
+    background-color: $afir-accent;
+    border-color: $afir-accent;
+    box-shadow: 0 10px 20px rgba(0, 174, 239, 0.18);
+}
+
+.btn-primary:hover,
+input[type="submit"].btn-primary:hover {
+    background-color: darken($afir-accent, 8%);
+    border-color: darken($afir-accent, 8%);
+}
+
+.card {
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 12px 34px rgba(17, 24, 39, 0.06);
+}
+
+#page-login-index #page {
+    background: linear-gradient(180deg, rgba(15, 42, 61, 0.74), rgba(15, 42, 61, 0.22)) !important;
+    min-height: 100vh;
+}
+
+#page-login-index .card {
+    border-radius: 18px;
+    box-shadow: 0 28px 80px rgba(17, 24, 39, 0.25);
+}
+
+#page-login-index .card::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 64px;
+    margin-bottom: 12px;
+    background-image: url('/local/afirws/assets/AFIR_col_100.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+// Masquer le message "Instances Reactive" qui s'affiche en bas de page
+div[data-for="loaders"] {
+    display: none !important;
+}
+
+div[data-for="subpanel"] {
+    display: none !important;
+}
+
+// Masquer également les éléments contenant "Instances Reactive"
+div:has(> div:contains("Instances Reactive")) {
+    display: none !important;
+}
+
+.afir-hero {
+    color: #fff;
+    background: linear-gradient(135deg, rgba(15, 42, 61, 0.95), rgba(15, 42, 61, 0.65));
+    box-shadow: 0 24px 80px rgba(15, 42, 61, 0.18);
+}
+
+.afir-hero-kicker {
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.06em;
+}
+
+.afir-hero-panel {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+}
+
+.afir-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 174, 239, 0.18);
+    color: #0F2A3D;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.afir-cta {
+    background: #fff;
+    box-shadow: 0 18px 60px rgba(17, 24, 39, 0.10);
+}
+
+#page-footer {
+    color: #6b7280;
+}

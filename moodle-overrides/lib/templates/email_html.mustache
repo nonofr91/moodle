@@ -1,0 +1,113 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template core/email_html
+
+    Template for all html emails.
+
+    Context variables required for this template:
+    * sitefullname
+    * siteshortname
+    * sitewwwroot
+    * subject
+    * to
+    * toname
+    * touserid
+    * tousername
+    * from
+    * fromname
+    * replyto
+    * replytoname
+    * body
+    * prefix
+}}
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#f3f4f6;margin:0;padding:0;">
+    <tr>
+        <td align="center" style="padding:24px 12px;">
+            <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">
+                <tr>
+                    <td style="background:#0F2A3D;padding:18px 22px;">
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                            <tr>
+                                <td style="vertical-align:middle;width:120px;padding:0;">
+                                    <img src="{{sitewwwroot}}/local/afirws/assets/AFIR_col_100.png" width="100" height="48" alt="AFIR" style="display:block;border:0;outline:none;text-decoration:none;max-width:100%;height:auto;" />
+                                </td>
+                                <td style="vertical-align:middle;padding:0 0 0 12px;">
+                                    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#ffffff;font-size:16px;font-weight:800;line-height:20px;">
+                                        AFIR – Centre de formation
+                                    </div>
+                                    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#cfe8ff;font-size:12px;line-height:16px;margin-top:4px;">
+                                        Formation professionnelle • Métiers de l’imprimerie
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:22px 22px 10px 22px;">
+                        {{#prefix}}
+                            <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;color:#6b7280;margin-bottom:6px;">
+                                {{{prefix}}}
+                            </div>
+                        {{/prefix}}
+                        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:24px;color:#111827;font-weight:700;">
+                            {{{subject}}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:0 22px 22px 22px;">
+                        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;color:#111827;">
+                            {{{body}}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:0 22px 22px 22px;">
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-top:1px solid #e5e7eb;">
+                            <tr>
+                                <td style="padding-top:14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#6b7280;">
+                                    <div>
+                                        Plateforme : <a href="{{sitewwwroot}}" target="_blank" style="color:#00AEEF;text-decoration:none;">{{sitewwwroot}}</a>
+                                    </div>
+                                    {{#replyto}}
+                                    <div>
+                                        Support : <a href="mailto:{{replyto}}" style="color:#00AEEF;text-decoration:none;">{{replyto}}</a>
+                                    </div>
+                                    {{/replyto}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background:#f9fafb;padding:14px 22px;">
+                        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;line-height:16px;color:#6b7280;">
+                            Ceci est un message automatique. Merci de ne pas répondre directement à cet email.
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#9ca3af;font-size:11px;line-height:16px;margin-top:10px;">
+                <span style="display:inline-block;width:10px;height:10px;background:#00AEEF;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>
+                <span style="display:inline-block;width:10px;height:10px;background:#EC008C;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>
+                <span style="display:inline-block;width:10px;height:10px;background:#F59E0B;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>
+            </div>
+        </td>
+    </tr>
+</table>

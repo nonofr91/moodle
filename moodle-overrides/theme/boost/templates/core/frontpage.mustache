@@ -1,0 +1,84 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_boost/core/frontpage
+
+    Front page template.
+
+    Example context (json):
+    {
+        "iscourse": true,
+        "hasnavbar": true,
+        "hasblocks": true,
+        "blocks": [
+            {
+                "title": "Test block",
+                "content": "Test content"
+            }
+        ]
+    }
+}}
+{{#isloggedin}}
+    {{#isguest}}
+        <!-- Guest user - show login form -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>{{#str}}loggedinnot, core{{/str}}</h2>
+                            <p>{{#str}}notloggedintitle, core{{/str}}</p>
+                            <a href="{{{ config.wwwroot }}}/login/index.php" class="btn btn-primary">{{#str}}login, core{{/str}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/isguest}}
+    {{^isguest}}
+        <!-- Logged in user - show regular homepage -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{#str}}home, core{{/str}}</h1>
+                    <p>{{#str}}sitehome, core{{/str}}</p>
+                </div>
+            </div>
+        </div>
+    {{/isguest}}
+{{/isloggedin}}
+{{^isloggedin}}
+    <!-- Not logged in - redirect to landing page -->
+    <script>
+        window.location.href = '{{{ config.wwwroot }}}/local/afirws/landing.php#catalogue';
+    </script>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url={{{ config.wwwroot }}}/local/afirws/landing.php#catalogue">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Redirection...</h2>
+                            <p>Si vous n'êtes pas redirigé automatiquement, <a href="{{{ config.wwwroot }}}/local/afirws/landing.php#catalogue">cliquez ici</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </noscript>
+{{/isloggedin}}
