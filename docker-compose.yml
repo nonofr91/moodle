@@ -4,6 +4,12 @@ services:
   db:
     image: mariadb:10.11
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-moodle}
@@ -21,6 +27,12 @@ services:
     restart: unless-stopped
     depends_on:
       - db
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/80'"]
+      interval: 15s
+      timeout: 5s
+      start_period: 60s
+      retries: 5
     environment:
       MOODLE_DB_HOST: ${MOODLE_DB_HOST:-db}
       MOODLE_DB_NAME: ${MOODLE_DB_NAME:-moodle}
@@ -47,6 +59,12 @@ services:
       MOODLE_DB_TYPE: ${MOODLE_DB_TYPE:-mariadb}
     volumes:
       - moodledata:/var/www/moodledata
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'test ! -f /var/www/moodledata/cron-last.log || test -z \"$(find /var/www/moodledata/cron-last.log -mmin +5)\"'"]
+      interval: 60s
+      timeout: 5s
+      start_period: 120s
+      retries: 3
     command: ["bash", "-lc", "while true; do if [ ! -f /var/www/html/config.php ] && [ -f /var/www/moodledata/config.php ]; then cp /var/www/moodledata/config.php /var/www/html/config.php; chown www-data:www-data /var/www/html/config.php || true; fi; php /var/www/html/admin/cli/cron.php > /var/www/moodledata/cron-last.log 2>&1; sleep 10; done"]
 
 volumes:
