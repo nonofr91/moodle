@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB path="local/afirws" version="2024122300" comment="Plugin local_afirws">
+    <TABLES>
+        <TABLE name="local_afirws_config" comment="Configuration du plugin">
+            <FIELDS>
+                <FIELD name="id" type="int" length="10" unsigned="true" sequence="true" comment="Primary key"/>
+                <FIELD name="name" type="char" length="100" notnull="true" sequence="false" comment="Nom du paramètre"/>
+                <FIELD name="value" type="text" notnull="true" sequence="false" comment="Valeur du paramètre"/>
+                <FIELD name="timemodified" type="int" length="10" unsigned="true" notnull="true" sequence="false" comment="Timestamp de modification"/>
+            </FIELDS>
+            <KEYS>
+                <KEY name="primary" type="primary" fields="id"/>
+                <KEY name="name" type="unique" fields="name"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>
